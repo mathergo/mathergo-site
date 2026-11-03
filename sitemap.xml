@@ -37,12 +37,17 @@
   </url>
   <url>
     <loc>https://www.ergotherapie-montpellier.fr/conseils.html</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.ergotherapie-montpellier.fr/conseil-ecriture-enfant.html</loc>
     <lastmod>2026-10-25</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.ergotherapie-montpellier.fr/conseil-tdah-devoirs.html</loc>
+    <lastmod>2026-11-03</lastmod>
     <priority>0.7</priority>
   </url>
 </urlset>
