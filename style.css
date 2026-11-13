@@ -732,5 +732,21 @@ h1, h2, h3 { text-wrap: balance; }
 /* Accessibilité / SEO */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .site-footer .footer-title { font-weight: 700; font-family: var(--font-main); }
-.zone-list { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.zone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; max-width: 1040px; }
+.zone-map-wrap { margin: 0; background: white; border-radius: 24px; padding: 14px; box-shadow: 10px 10px 0 var(--color-bg-alt), 0 10px 30px rgba(0,0,0,.05); }
+.zone-map { display: block; width: 100%; height: auto; border-radius: 14px; }
+.zm-sea { fill: #E4ECEB; }
+.zm-other path { fill: #F4F1EB; stroke: #D9D2C5; stroke-width: 1; }
+.zm-served path { fill: #A9C2AE; stroke: #fff; stroke-width: 2.2; stroke-linejoin: round; transition: fill .2s; }
+.zm-served path:hover { fill: #8FAE96; }
+.zm-labels text { font-family: var(--font-main); font-size: 19px; font-weight: 700; fill: var(--color-primary-dark); text-anchor: middle; paint-order: stroke; stroke: rgba(255,255,255,.85); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
+.zm-sea-label { font-family: var(--font-title); font-style: italic; font-size: 18px; fill: #8DA3A0; text-anchor: middle; }
+.zm-pin path { fill: #C8754A; stroke: #fff; stroke-width: 2; }
+.zm-pin circle { fill: #fff; }
+.zone-map-wrap figcaption { font-size: .85rem; color: var(--color-text-muted); margin-top: 10px; text-align: center; line-height: 1.6; }
+.zone-map-wrap figcaption small { font-size: .72rem; color: #777; }
+.zm-key { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #A9C2AE; vertical-align: -1px; margin-right: 4px; }
+.zm-key-pin { display: inline-block; width: 10px; height: 10px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #C8754A; margin: 0 4px 0 14px; vertical-align: 0; }
+.zone-list { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: 10px; }
 .zone-list li { background: var(--color-bg-alt); color: var(--color-primary-dark); font-weight: 600; padding: 8px 16px; border-radius: 999px; font-size: .95rem; }
+@media (max-width: 860px) { .zone-grid { grid-template-columns: 1fr; gap: 32px; } .zone-map-wrap { order: 2; } .zone-text { text-align: center; } .zone-list { justify-content: center; } }
