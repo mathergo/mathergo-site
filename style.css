@@ -744,7 +744,7 @@ h1, h2, h3 { text-wrap: balance; }
 .zm-pin path { fill: #C8754A; stroke: #fff; stroke-width: 2; }
 .zm-pin circle { fill: #fff; }
 .zone-map-wrap figcaption { font-size: .85rem; color: var(--color-text-muted); margin-top: 10px; text-align: center; line-height: 1.6; }
-.zone-map-wrap figcaption small { font-size: .72rem; color: #777; }
+.zone-map-wrap figcaption small { font-size: .72rem; color: #666; }
 .zm-key { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #A9C2AE; vertical-align: -1px; margin-right: 4px; }
 .zm-key-pin { display: inline-block; width: 10px; height: 10px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #C8754A; margin: 0 4px 0 14px; vertical-align: 0; }
 .zone-list { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: 10px; }
