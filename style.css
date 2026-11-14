@@ -29,6 +29,11 @@
     --radius-btn: 50px;       /* Boutons pilules */
     --container-width: 1100px;
     --font-main: 'DM Sans', sans-serif;
+
+    /* --- MOUVEMENTS --- */
+    --ease-out: cubic-bezier(.22, 1, .36, 1);     /* entrées */
+    --ease-in: cubic-bezier(.55, 0, 1, .45);      /* sorties */
+    --ease-in-out: cubic-bezier(.65, 0, .35, 1);  /* déplacements */
 }
 
 /* -----------------------------------------------------------
@@ -178,7 +183,7 @@ p { margin-bottom: 1.5rem; color: #555; }
     border: none;
     font-size: 1rem;
     letter-spacing: 0.5px;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), background-color .2s ease, color .2s ease;
 }
 
 .btn-primary {
@@ -409,7 +414,7 @@ footer a[href^="tel:"] { color: var(--color-primary-dark); font-weight: 600; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
 
 /* -----------------------------------------------------------
@@ -539,7 +544,7 @@ header.section-padding {
 .btn:hover { transform: translateY(-2px); }
 
 /* Apparition douce au défilement (gérée par site.js) */
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
 .reveal.is-visible { opacity: 1; transform: none; }
 
 /* ---------- Curseur : crayon avec guide-doigts ergonomique (souris uniquement) ---------- */
@@ -589,7 +594,7 @@ header.section-padding {
     .is-open .nav-toggle-bars::after { transform: translateY(-5px) rotate(-45deg); }
     .nav-menu {
         display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 4px;
-        margin-top: 12px; padding: 10px; background: white; border-radius: 18px; box-shadow: var(--shadow-soft);
+        margin-top: 12px; padding: 10px; background: white; border-radius: 20px; box-shadow: var(--shadow-soft); /* 10 (liens) + 10 (marge) */
     }
     .nav-container.is-open .nav-menu { display: flex; }
     .nav-menu .nav-link { display: block; padding: 10px 12px; border-radius: 10px; font-size: 1rem; }
@@ -734,7 +739,7 @@ h1, h2, h3 { text-wrap: balance; }
 .site-footer .footer-title { font-weight: 700; font-family: var(--font-main); }
 .zone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; max-width: 1040px; }
 .zone-map-wrap { margin: 0; background: white; border-radius: 24px; padding: 14px; box-shadow: 10px 10px 0 var(--color-bg-alt), 0 10px 30px rgba(0,0,0,.05); }
-.zone-map { display: block; width: 100%; height: auto; border-radius: 14px; }
+.zone-map { display: block; width: 100%; height: auto; border-radius: 10px; } /* 24 (cadre) − 14 (marge) */
 .zm-sea { fill: #E4ECEB; }
 .zm-other path { fill: #F4F1EB; stroke: #D9D2C5; stroke-width: 1; }
 .zm-served path { fill: #A9C2AE; stroke: #fff; stroke-width: 2.2; stroke-linejoin: round; transition: fill .2s; }
@@ -766,10 +771,10 @@ main:focus { outline: none; }
     background: white; color: var(--color-primary-dark); box-shadow: var(--shadow-soft);
     display: flex; align-items: center; justify-content: center;
     opacity: 0; visibility: hidden; transform: translateY(10px);
-    transition: opacity .3s, transform .3s, visibility .3s, background .2s;
+    transition: opacity .2s var(--ease-in), transform .2s var(--ease-in), visibility .2s, background-color .2s ease;
 }
 .back-to-top svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-.back-to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.back-to-top.is-visible { opacity: 1; visibility: visible; transform: none; transition-duration: .25s, .25s, .25s, .2s; transition-timing-function: var(--ease-out); }
 .back-to-top:hover { background: #EAF2EC; }
 .back-to-top:focus-visible, .copy-btn:focus-visible, .print-btn:focus-visible { outline: 3px solid #F2B66D; outline-offset: 2px; }
 @media (max-width: 768px) { .back-to-top { right: 16px; bottom: calc(84px + env(safe-area-inset-bottom)); width: 44px; height: 44px; } }
@@ -794,4 +799,37 @@ main:focus { outline: none; }
     img { box-shadow: none !important; }
     a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .85em; color: #555; word-break: break-all; }
     main::after { content: "Mathéo Duchemin, ergothérapeute D.E · 07 45 00 00 43 · www.ergotherapie-montpellier.fr"; display: block; margin-top: 24pt; padding-top: 8pt; border-top: 1px solid #ccc; font-size: 10pt; color: #555; }
+}
+
+/* ---------- Mouvements : retour au toucher, menu, confirmations ---------- */
+/* Les boutons s'enfoncent légèrement à l'appui */
+.btn:active, .nav-toggle:active, .back-to-top:active, .copy-btn:active, .print-btn:active { transform: scale(.97); transition-duration: .1s; }
+.back-to-top.is-visible:active { transform: scale(.97); }
+
+/* FAQ : la réponse apparaît en douceur, le « + » tourne en ease-out */
+.faq summary::after { transition: transform .2s var(--ease-out); }
+.faq details[open] > p { animation: faq-in .22s var(--ease-out); }
+@keyframes faq-in { from { opacity: 0; transform: translateY(-4px); } }
+
+/* Formulaire envoyé : petite pulsation de confirmation */
+.form-status.is-success { animation: pulse-ok .45s var(--ease-out); }
+@keyframes pulse-ok { 0% { opacity: 0; transform: scale(.96); } 60% { opacity: 1; transform: scale(1.02); } 100% { transform: scale(1); } }
+
+/* Bouton « Copier » : le texte change en fondu avec un léger flou */
+.copy-btn.is-done { animation: swap-in .2s var(--ease-out); }
+@keyframes swap-in { from { opacity: 0; filter: blur(2px); transform: scale(.9); } }
+
+/* Menu mobile : s'ouvre depuis le bouton (en haut à droite), 200 ms ; se ferme plus vite, 160 ms */
+@media (max-width: 768px) {
+    .nav-container { position: relative; }
+    .nav-menu {
+        display: flex; position: absolute; top: 100%; left: 25px; right: 25px; width: auto; z-index: 1002;
+        transform-origin: top right;
+        opacity: 0; visibility: hidden; transform: scale(.95);
+        transition: opacity .16s var(--ease-in), transform .16s var(--ease-in), visibility 0s linear .16s;
+    }
+    .nav-container.is-open .nav-menu {
+        opacity: 1; visibility: visible; transform: none;
+        transition: opacity .2s var(--ease-out), transform .2s var(--ease-out), visibility 0s;
+    }
 }

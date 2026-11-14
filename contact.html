@@ -438,6 +438,7 @@
                 form.reset();
                 statut.textContent = 'Merci ! Votre demande est bien envoyée. Je vous rappelle très vite.';
                 statut.classList.add('is-success');
+                statut.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }).catch(function () {
                 statut.textContent = 'Oups, l’envoi n’a pas fonctionné. Appelez-moi directement au 07 45 00 00 43.';
                 statut.classList.add('is-error');

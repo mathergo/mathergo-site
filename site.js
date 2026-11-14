@@ -51,7 +51,8 @@
         b.addEventListener('click', function () {
             navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function () {
                 b.textContent = 'Copié\u00a0!';
-                setTimeout(function () { b.textContent = texte; }, 2000);
+                b.classList.remove('is-done'); void b.offsetWidth; b.classList.add('is-done');
+                setTimeout(function () { b.textContent = texte; b.classList.remove('is-done'); }, 2000);
             }, function () { b.hidden = true; });
         });
     });
@@ -80,8 +81,15 @@
     if (reduit || !('IntersectionObserver' in window)) return;
     var cibles = document.querySelectorAll('.card, .price-card, .step, .timeline li, .cta-final, .why-quote, .check-list li, .section-title');
     var obs = new IntersectionObserver(function (entrees) {
+        // Les éléments qui arrivent ensemble apparaissent l'un après l'autre (30 ms d'écart)
+        var rang = 0;
         entrees.forEach(function (e) {
-            if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+            if (!e.isIntersecting) return;
+            var el = e.target;
+            el.style.transitionDelay = Math.min(rang++, 8) * 30 + 'ms';
+            el.classList.add('is-visible');
+            setTimeout(function () { el.style.transitionDelay = ''; }, 900); // ne pas retarder le survol ensuite
+            obs.unobserve(e.target);
         });
     }, { threshold: 0.12 });
     cibles.forEach(function (el) {
