@@ -753,3 +753,32 @@ h1, h2, h3 { text-wrap: balance; }
 .zone-list { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: 10px; }
 .zone-list li { background: var(--color-bg-alt); color: var(--color-primary-dark); font-weight: 600; padding: 8px 16px; border-radius: 999px; font-size: .95rem; }
 @media (max-width: 860px) { .zone-grid { grid-template-columns: 1fr; gap: 32px; } .zone-map-wrap { order: 2; } .zone-text { text-align: center; } .zone-list { justify-content: center; } }
+
+/* -----------------------------------------------------------
+   HIÉRARCHIE DES COULEURS (nov. 2026)
+   Le vert est réservé à ce qui se clique (boutons, liens, menu) :
+   les titres passent en vert très foncé, presque noir, pour que
+   les boutons d'action ressortent davantage.
+----------------------------------------------------------- */
+h2 { color: var(--color-ink); }
+.nav-link { white-space: nowrap; }
+.nav-link:hover, .nav-link.active { color: var(--color-primary-dark); }
+.nav-link.active { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; text-decoration-color: #F2B66D; }
+.navbar .btn { white-space: nowrap; }
+@media (min-width: 769px) and (max-width: 1300px) {
+    .nav-container { gap: 24px; }
+    .brand a { font-size: 1.3rem; }
+    .nav-menu { gap: 18px; }
+    .navbar .btn { padding: 12px 22px; }
+}
+@media (min-width: 769px) and (max-width: 900px) {
+    .nav-container { gap: 14px; }
+    .brand a { font-size: 1.05rem; }
+    .nav-menu { gap: 10px; }
+    .nav-link { font-size: .8rem; }
+    .navbar .btn { padding: 9px 14px; font-size: .8rem; }
+}
+a:focus-visible, button:focus-visible, .btn:focus-visible, select:focus-visible { outline-color: var(--color-primary-dark); }
+.contact-info-side p[style*="opacity"] { opacity: .9 !important; }
+.brand a { white-space: nowrap; }
+@media (max-width: 768px) { .nav-menu .nav-link.active { text-decoration: none; } }
